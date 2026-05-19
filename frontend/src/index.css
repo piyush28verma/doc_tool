@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+.upload-zone {
+  border: 2px dashed #475569;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.upload-zone:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+}
+
+.upload-zone.dragging {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+  transform: scale(1.01);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.file-card {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 10px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.file-card:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.file-card.selected {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.file-card.dragging {
+  opacity: 0.5;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-2.5 rounded-lg font-medium
+    hover:from-blue-500 hover:to-blue-400 transition-all duration-200
+    active:scale-95 shadow-lg shadow-blue-500/25;
+}
+
+.btn-secondary {
+  @apply bg-dark-700 text-dark-200 px-5 py-2.5 rounded-lg font-medium
+    hover:bg-dark-600 transition-all duration-200
+    active:scale-95 border border-dark-600;
+}
+
+.btn-danger {
+  @apply bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2 rounded-lg font-medium
+    hover:from-red-500 hover:to-red-400 transition-all duration-200
+    active:scale-95 shadow-lg shadow-red-500/25;
+}
+
+.btn-icon {
+  @apply p-2 rounded-lg transition-all duration-200 hover:bg-dark-600 active:scale-90;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: #1e293b;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 16px;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.toast {
+  animation: slideDown 0.3s ease;
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.toast-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.toast-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.toast-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.toast-info {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #334155;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.preview-panel {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+  border-radius: 12px;
+}
+
+.docx-preview {
+  background: white;
+  color: #1e293b;
+  padding: 32px;
+  border-radius: 8px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.docx-preview h1, .docx-preview h2, .docx-preview h3 {
+  color: #0f172a;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.docx-preview p {
+  margin-bottom: 8px;
+}
+
+.docx-preview table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.docx-preview td, .docx-preview th {
+  border: 1px solid #cbd5e1;
+  padding: 8px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #334155;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page-thumbnail {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.page-thumbnail:hover {
+  border-color: #60a5fa;
+}
+
+.page-thumbnail.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .upload-zone {
+    padding: 24px 16px;
+    border-radius: 12px;
+  }
+
+  .docx-preview {
+    padding: 16px;
+    font-size: 13px;
+    max-height: 350px;
+  }
+
+  .modal-content {
+    border-radius: 12px;
+    margin: 8px;
+  }
+
+  .file-card {
+    padding: 10px 12px;
+  }
+
+  .preview-panel {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    background: #0f172a;
+  }
+
+  .upload-zone {
+    padding: 20px 12px;
+    border-radius: 10px;
+  }
+
+  .glass-card {
+    border-radius: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .btn-icon {
+    padding: 6px;
+  }
+
+  .toast {
+    border-radius: 8px;
+  }
+
+  .modal-content {
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .file-card {
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .docx-preview {
+    padding: 12px;
+    font-size: 12px;
+    max-height: 300px;
+  }
+
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+
+  .page-thumbnail img {
+    height: 48px;
+  }
+}
+
+@media (max-width: 400px) {
+  .upload-zone {
+    padding: 16px 8px;
+  }
+
+  .modal-content {
+    padding: 16px;
+  }
+}
