@@ -124,14 +124,3 @@ The backend is an Express server that stores uploaded files on disk and handles 
 
 In development, the frontend proxies API calls to the backend through Vite's dev server proxy. In production, the backend serves the built frontend as static files.
 
-## Challenges and Solutions
-
-1. **DOCX Preview** — Browsers can't render DOCX natively. Used mammoth.js on the backend to convert DOCX to HTML, then displayed the HTML in the frontend.
-
-2. **PDF Page Operations** — Used pdf-lib to rotate and delete pages in-place on the server without requiring a re-upload.
-
-3. **PDF Export** — DOCX and DOC files are first converted to PDF using mammoth (text extraction) and pdfkit (PDF creation), then all PDFs are merged into a single file using pdf-merger-js.
-
-4. **DOCX Export** — Text is extracted from PDFs using pdfjs-dist and from DOCX files using mammoth, then everything is assembled into a valid DOCX file using the docx package.
-
-5. **Drag-and-Drop Reordering** — Used @dnd-kit for accessible drag-and-drop with pointer and keyboard sensor support.
