@@ -22,3 +22,4 @@ EXPOSE 5001
 # Start the server
 WORKDIR /app/backend
 CMD ["node", "server.js"]
+

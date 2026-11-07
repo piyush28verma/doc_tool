@@ -36,3 +36,4 @@ Add screenshots showing the visual changes.
 ## Related Issues
 
 Closes #(issue number)
+

@@ -1,0 +1,52 @@
+{
+  "name": "docmerge",
+  "version": "1.0.0",
+  "description": "Merge, rotate, and manipulate PDF and DOCX documents in Node.js. Combine multiple files into a single PDF or DOCX with page-level control.",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "pdf",
+    "docx",
+    "merge",
+    "combine",
+    "document",
+    "pdf-merge",
+    "pdf-combine",
+    "docx-merge",
+    "rotate-pdf",
+    "pdf-pages",
+    "document-processing",
+    "pdf-manipulation"
+  ],
+  "author": "Piyush Verma <vermapiyush.jgj.28@gmail.com> (https://github.com/piyush28verma)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piyush28verma/doc_tool.git",
+    "directory": "packages/docmerge"
+  },
+  "bugs": {
+    "url": "https://github.com/piyush28verma/doc_tool/issues"
+  },
+  "homepage": "https://github.com/piyush28verma/doc_tool/tree/main/packages/docmerge#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "docx": "^9.6.1",
+    "mammoth": "^1.6.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-merger-js": "^5.1.2",
+    "pdfjs-dist": "^3.11.174",
+    "pdfkit": "^0.13.0"
+  }
+}
+
