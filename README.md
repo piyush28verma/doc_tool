@@ -1,10 +1,10 @@
 <div align="center">
 
-# 📄 DocMerge
+# DocMerge
 
 **A free, open-source document combiner and export tool.**
 
-Upload PDF, DOC, and DOCX files — reorder, preview, edit pages, and merge into a single downloadable document.
+Upload PDF, DOC, and DOCX files, reorder, preview, edit pages, and merge into a single downloadable document.
 
 [![CI](https://github.com/piyush28verma/doc_tool/actions/workflows/ci.yml/badge.svg)](https://github.com/piyush28verma/doc_tool/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -18,19 +18,19 @@ Upload PDF, DOC, and DOCX files — reorder, preview, edit pages, and merge into
 
 ---
 
-## ✨ Why DocMerge?
+## Why DocMerge?
 
 Most document merging tools are paywalled, ad-heavy, or send your files to third-party servers. DocMerge is different:
 
-- **🆓 Completely free** — no watermarks, no file size tricks, no signup walls
-- **🔒 Privacy-first** — your files stay on the server you control, never shared with third parties
-- **🏠 Self-hostable** — run it on your own machine or server with Docker
-- **📖 Open source** — inspect, modify, and contribute to the code
+- **Completely free** - no watermarks, no file size tricks, no signup walls
+- **Privacy-first** - your files stay on the server you control, never shared with third parties
+- **Self-hostable** - run it on your own machine or server with Docker
+- **Open source** - inspect, modify, and contribute to the code
 
-## 🎯 Features
+## Features
 
 - **Drag-and-drop upload** with click-to-browse fallback
-- **File validation** — PDF, DOC, DOCX only, 50MB limit per file
+- **File validation** - PDF, DOC, DOCX only, 50MB limit per file
 - **Drag-and-drop reordering** to control merge order
 - **Batch selection** with select all / deselect all
 - **Individual and bulk file deletion** with confirmation dialogs
@@ -46,7 +46,7 @@ Most document merging tools are paywalled, ad-heavy, or send your files to third
 - **Responsive layout** for desktop, tablet, and mobile
 - **Loading spinners** during upload and merge operations
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technologies |
 |-------|-------------|
@@ -54,7 +54,7 @@ Most document merging tools are paywalled, ad-heavy, or send your files to third
 | **Backend** | Node.js, Express, multer, pdf-merger-js, pdf-lib, pdfjs-dist, mammoth, pdfkit, docx |
 | **DevTools** | Vite, PostCSS, Autoprefixer |
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -92,7 +92,7 @@ Frontend runs on http://localhost:3000
 
 Go to http://localhost:3000 in your browser. Both servers need to be running.
 
-### 🐳 Docker (Alternative)
+### Docker (Alternative)
 
 ```bash
 docker compose up --build
@@ -100,7 +100,7 @@ docker compose up --build
 
 App will be available at http://localhost:5001
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 doc_tool/
@@ -140,7 +140,7 @@ doc_tool/
 └── README.md
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -153,15 +153,15 @@ doc_tool/
 | `POST` | `/api/rotate` | Rotate a PDF page by 90° |
 | `POST` | `/api/delete-page` | Remove a specific page from a PDF |
 
-## 📖 How to Use
+## How to Use
 
-1. **Upload** — Drag files onto the upload zone or click to browse
-2. **Reorder** — Drag files up and down to set the merge order
-3. **Preview** — Click a file to preview its content
-4. **Edit** — Use rotate and delete buttons to edit PDF pages
-5. **Export** — Click "Merge & Export", pick a filename and format, then download
+1. **Upload** - Drag files onto the upload zone or click to browse
+2. **Reorder** - Drag files up and down to set the merge order
+3. **Preview** - Click a file to preview its content
+4. **Edit** - Use rotate and delete buttons to edit PDF pages
+5. **Export** - Click "Merge & Export", pick a filename and format, then download
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] Add comprehensive test suite (Jest + React Testing Library)
 - [ ] Extract core merging logic into a standalone npm package
@@ -174,20 +174,20 @@ doc_tool/
 
 See the [open issues](https://github.com/piyush28verma/doc_tool/issues) for a full list of proposed features and known issues.
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are what make the open-source community amazing. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open-source community great. Any contributions you make are **greatly appreciated**.
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, development setup, and the process for submitting pull requests.
 
 **Areas where help is wanted:**
-- 🧪 Test coverage (backend and frontend)
-- 🌐 Internationalization
-- ♿ Accessibility improvements
-- 📄 New document format support
-- 📱 Mobile UX improvements
+- Test coverage (backend and frontend)
+- Internationalization
+- Accessibility improvements
+- New document format support
+- Mobile UX improvements
 
-## 🏗️ Architecture
+## Architecture
 
 The **frontend** is a React single-page app that handles all UI, PDF rendering (pdf.js canvas), DOCX preview (HTML from backend), and drag-and-drop reordering.
 
@@ -198,18 +198,18 @@ The **backend** is an Express server that stores uploaded files on disk and hand
 
 In development, the frontend proxies API calls to the backend through Vite's dev server proxy. In production, the backend serves the built frontend as static files.
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- [pdf-lib](https://github.com/Hopding/pdf-lib) — PDF manipulation in JavaScript
-- [pdf-merger-js](https://github.com/nickmomrik/pdf-merger-js) — PDF merging
-- [pdfjs-dist](https://github.com/nickmomrik/pdf-merger-js) — PDF rendering and text extraction
-- [mammoth](https://github.com/mwilliamson/mammoth.js) — DOCX to HTML conversion
-- [@dnd-kit](https://github.com/clauderic/dnd-kit) — Drag and drop toolkit for React
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
+- [pdf-lib](https://github.com/Hopding/pdf-lib) - PDF manipulation in JavaScript
+- [pdf-merger-js](https://github.com/nickmomrik/pdf-merger-js) - PDF merging
+- [pdfjs-dist](https://github.com/nickmomrik/pdf-merger-js) - PDF rendering and text extraction
+- [mammoth](https://github.com/mwilliamson/mammoth.js) - DOCX to HTML conversion
+- [@dnd-kit](https://github.com/clauderic/dnd-kit) - Drag and drop toolkit for React
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 
 ---
 
@@ -217,6 +217,6 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 Made with ❤️ by [Piyush Verma](https://github.com/piyush28verma)
 
-⭐ Star this repo if you find it useful!
+Star this repo if you find it useful!
 
 </div>
