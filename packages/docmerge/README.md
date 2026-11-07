@@ -1,132 +1,172 @@
-# docmerge
+<div align="center">
 
-> Merge, rotate, and manipulate PDF and DOCX documents in Node.js.
+# 📄 docmerge
 
-[![npm version](https://img.shields.io/npm/v/docmerge.svg)](https://www.npmjs.com/package/docmerge)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../../LICENSE)
-[![Node.js](https://img.shields.io/badge/Node.js-16%2B-green.svg)](https://nodejs.org/)
+**Merge, rotate, and manipulate PDF & DOCX documents in Node.js**
 
-Combine multiple PDF, DOCX, and DOC files into a single document. Rotate or delete individual PDF pages. Extract text from PDFs and DOCX files. Zero external services — everything runs locally.
+[![npm version](https://img.shields.io/npm/v/@piyush28verma/docmerge.svg)](https://www.npmjs.com/package/@piyush28verma/docmerge)
+[![npm downloads](https://img.shields.io/npm/dm/@piyush28verma/docmerge.svg)](https://www.npmjs.com/package/@piyush28verma/docmerge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/piyush28verma/doc_tool/blob/main/LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D16-green.svg)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-types%20included-blue.svg)](https://www.npmjs.com/package/@piyush28verma/docmerge)
+
+Combine multiple PDF, DOCX, and DOC files into a single document. Rotate or delete individual pages. Extract text. Everything runs locally — no external APIs, no cloud services, no data leaves your machine.
+
+[GitHub](https://github.com/piyush28verma/doc_tool) · [Live Demo](https://doc-tool.onrender.com/) · [Report Bug](https://github.com/piyush28verma/doc_tool/issues)
+
+</div>
+
+---
 
 ## Install
 
 ```bash
-npm install docmerge
+npm install @piyush28verma/docmerge
 ```
+
+## Why docmerge?
+
+- 🔒 **Runs 100% locally** — no files uploaded to external servers
+- 📄 **Multi-format** — handles PDF, DOCX, and DOC files
+- 🔀 **Merge to PDF or DOCX** — choose your output format
+- ✂️ **Page-level control** — rotate, delete, and count individual pages
+- 📝 **Text extraction** — pull text from PDFs and DOCX files
+- 📦 **Zero config** — no API keys, no setup, just install and use
+- 🏷️ **TypeScript ready** — full type definitions included
 
 ## Quick Start
 
 ```js
-const { mergeToPdf, mergeToDocx, rotatePage, deletePage, extractPdfText } = require('docmerge');
+const { mergeToPdf, mergeToDocx } = require('@piyush28verma/docmerge');
 const fs = require('fs');
 
-// Merge files into a single PDF
-const pdfBuffer = await mergeToPdf([
+// Merge multiple documents into one PDF
+const pdf = await mergeToPdf([
   'chapter1.pdf',
   'chapter2.docx',
-  'appendix.pdf',
+  'appendix.pdf'
 ]);
-fs.writeFileSync('book.pdf', pdfBuffer);
-
-// Merge files into a single DOCX
-const docxBuffer = await mergeToDocx([
-  { path: 'report.pdf', name: 'Q4 Report' },
-  { path: 'summary.docx', name: 'Executive Summary' },
-]);
-fs.writeFileSync('combined.docx', docxBuffer);
+fs.writeFileSync('book.pdf', pdf);
 ```
 
-## API
+```js
+// Merge into DOCX with custom section names
+const docx = await mergeToDocx([
+  { path: 'report.pdf', name: 'Q4 Report' },
+  { path: 'summary.docx', name: 'Executive Summary' }
+]);
+fs.writeFileSync('combined.docx', docx);
+```
 
-### `mergeToPdf(files, options?)`
+```js
+// Page-level operations
+const { rotatePage, deletePage, getPageCount } = require('@piyush28verma/docmerge');
 
-Merge multiple documents into a single PDF.
+const count = await getPageCount('document.pdf');         // 12
+const rotated = await rotatePage('document.pdf', 0, 90);  // rotate first page
+const { buffer } = await deletePage('document.pdf', 5);   // remove page 6
+```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `files` | `Array<string \| {path, name?}>` | File paths or objects with path and optional display name |
-| `options.tempDir` | `string` | Temp directory for intermediate files (default: `os.tmpdir()`) |
+```js
+// Text extraction
+const { extractPdfText, extractDocxText } = require('@piyush28verma/docmerge');
 
-**Returns:** `Promise<Buffer>` — the merged PDF
+const pdfText = await extractPdfText('paper.pdf');
+const docxText = await extractDocxText('report.docx');
+```
 
-**Supported formats:** `.pdf`, `.docx`, `.doc`
+## API Reference
 
----
+### Merging
 
-### `mergeToDocx(files)`
+#### `mergeToPdf(files, options?)` → `Promise<Buffer>`
 
-Merge multiple documents into a single DOCX. Text is extracted from each file and combined with headings.
+Merge documents into a single PDF.
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `files` | `Array<string \| {path, name?}>` | File paths or objects with path and optional display name |
+```js
+const pdf = await mergeToPdf(['a.pdf', 'b.docx', 'c.doc']);
+const pdf = await mergeToPdf([{ path: 'a.pdf', name: 'Part 1' }]);
+const pdf = await mergeToPdf(files, { tempDir: '/tmp/custom' });
+```
 
-**Returns:** `Promise<Buffer>` — the merged DOCX
+| Param | Type | Description |
+|---|---|---|
+| `files` | `Array<string \| {path, name?}>` | Paths or objects with optional display name |
+| `options.tempDir` | `string` | Temp dir for intermediary files (default: `os.tmpdir()`) |
 
----
+Supported input: `.pdf`, `.docx`, `.doc`
 
-### `rotatePage(filePath, pageIndex, angle?)`
+#### `mergeToDocx(files)` → `Promise<Buffer>`
 
-Rotate a specific page in a PDF.
+Merge documents into a single DOCX. Extracts text from each file and combines with headings.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `filePath` | `string` | — | Path to PDF |
-| `pageIndex` | `number` | — | Zero-based page index |
-| `angle` | `number` | `90` | Rotation angle in degrees |
+```js
+const docx = await mergeToDocx(['report.pdf', 'notes.docx']);
+```
 
-**Returns:** `Promise<Buffer>` — the modified PDF
+### Page Operations
 
----
+#### `rotatePage(filePath, pageIndex, angle?)` → `Promise<Buffer>`
 
-### `deletePage(filePath, pageIndex)`
+Rotate a PDF page. Returns the modified PDF.
 
-Remove a specific page from a PDF.
+```js
+const buf = await rotatePage('doc.pdf', 0, 90);   // 90° clockwise
+const buf = await rotatePage('doc.pdf', 2, 180);   // flip upside down
+```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `filePath` | `string` | Path to PDF |
-| `pageIndex` | `number` | Zero-based page index |
+#### `deletePage(filePath, pageIndex)` → `Promise<{buffer, pageCount}>`
 
-**Returns:** `Promise<{buffer: Buffer, pageCount: number}>`
+Remove a page from a PDF. Returns the modified PDF and new page count.
 
----
+```js
+const { buffer, pageCount } = await deletePage('doc.pdf', 3);
+```
 
-### `getPageCount(filePath)`
+#### `getPageCount(filePath)` → `Promise<number>`
 
-Get the number of pages in a PDF.
+```js
+const pages = await getPageCount('doc.pdf'); // 24
+```
 
-**Returns:** `Promise<number>`
+### Text Extraction
 
----
+#### `extractPdfText(filePath)` → `Promise<string>`
 
-### `extractPdfText(filePath)`
+Extract all text from a PDF.
 
-Extract all text content from a PDF file.
+#### `extractDocxText(filePath)` → `Promise<string>`
 
-**Returns:** `Promise<string>`
-
----
-
-### `extractDocxText(filePath)`
-
-Extract all text content from a DOCX file.
-
-**Returns:** `Promise<string>`
+Extract all text from a DOCX file.
 
 ## Use Cases
 
-- **Document assembly** — Combine contracts, reports, and appendices into a single file
-- **Batch processing** — Merge hundreds of invoices or receipts
-- **Build pipelines** — Generate combined documentation from multiple sources
-- **Academic** — Merge research papers, citations, and supplementary materials
-- **Legal** — Combine case files, exhibits, and filings
+| Use Case | Example |
+|---|---|
+| **Document assembly** | Combine contracts, appendices, and cover pages |
+| **Batch processing** | Merge hundreds of invoices into one file |
+| **Build pipelines** | Generate combined docs from multiple sources |
+| **Academic** | Merge papers, citations, and supplementary materials |
+| **Legal** | Combine case files, exhibits, and filings |
+| **Reporting** | Merge monthly reports into quarterly summaries |
 
 ## Part of DocMerge
 
-This package is the core engine behind [DocMerge](https://github.com/piyush28verma/doc_tool), a free, open-source document combiner web app. Try the live demo at [doc-tool.onrender.com](https://doc-tool.onrender.com/).
+This package powers [**DocMerge**](https://github.com/piyush28verma/doc_tool) — a free, open-source document combiner web app.
+
+👉 **Try it live:** [doc-tool.onrender.com](https://doc-tool.onrender.com/)
+
+## Contributing
+
+Contributions welcome! See [CONTRIBUTING.md](https://github.com/piyush28verma/doc_tool/blob/main/CONTRIBUTING.md) for details.
+
+```bash
+git clone https://github.com/piyush28verma/doc_tool.git
+cd doc_tool/packages/docmerge
+npm install
+npm test
+```
 
 ## License
 
 MIT © [Piyush Verma](https://github.com/piyush28verma)
-

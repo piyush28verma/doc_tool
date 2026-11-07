@@ -1,6 +1,6 @@
 {
   "name": "@piyush28verma/docmerge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Merge, rotate, and manipulate PDF and DOCX documents in Node.js. Combine multiple files into a single PDF or DOCX with page-level control.",
   "main": "src/index.js",
   "types": "src/index.d.ts",
